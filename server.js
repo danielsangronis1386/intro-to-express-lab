@@ -53,7 +53,44 @@ Examples: Matches routes such as /collectibles/2 or /collectibles/0.
         res.send(`so, you want the ${item.name}? For ${item.price}, it can be yours!`)
     }
 })
+/* Task: Create a route /shoes that filters the list of shoes based on query parameters.
 
+Query Parameters:
+
+min-price: Excludes shoes below this price.
+max-price: Excludes shoes above this price.
+type: Shows only shoes of the specified type.
+No parameters: Responds with the full list of shoes.*/
+  const shoes = [
+      { name: "Birkenstocks", price: 50, type: "sandal" },
+      { name: "Air Jordans", price: 500, type: "sneaker" },
+      { name: "Air Mahomeses", price: 501, type: "sneaker" },
+      { name: "Utility Boots", price: 20, type: "boot" },
+      { name: "Velcro Sandals", price: 15, type: "sandal" },
+      { name: "Jet Boots", price: 1000, type: "boot" },
+      { name: "Fifty-Inch Heels", price: 175, type: "heel" }
+  ];
+
+app.get('/shoes', (req, res) => {
+    let filteredShoes = shoes
+    const minPrice = parseFloat(req.query['min-price'])
+    const maxPrice = parseFloat(req.query['max-price'])
+    const type = req.query.type
+
+    if (!isNaN(minPrice)) {
+        filteredShoes = filteredShoes.filter(shoe => shoe.price >= minPrice)
+    }
+    if (!isNaN(maxPrice)) {
+        filteredShoes = filteredShoes.filter(shoe => shoe.price <= maxPrice)
+    }
+    if (type){
+        filteredShoes =filteredShoes.filter(shoe => shoe.type === type)
+    }
+    
+    res.json(filteredShoes)
+
+
+})
 
 
 

@@ -31,7 +31,7 @@ app.get('/roll/:number', (req, res) => {
     }
 
 })
-/*3. I Want THAT One!
+/* I Want THAT One!
 Task: Create a route for URLs like /collectibles/<index-parameter>.
 
 Examples: Matches routes such as /collectibles/2 or /collectibles/0.
